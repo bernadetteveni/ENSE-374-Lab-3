@@ -1,0 +1,44 @@
+{
+    "tasks": [
+        {
+            "_id": 1,
+            "name": "1 unclaimed task",
+            "owner": null,
+            "creator": "creator1",
+            "done": false,
+            "cleared": false
+        },
+        {
+            "_id": 2,
+            "name": "1 claimed by user1 and unfinished",
+            "owner": "user1",
+            "creator": "creator2",
+            "done": false,
+            "cleared": false
+        },
+        {
+            "_id": 3,
+            "name": "1 claimed by user2 and unfinished",
+            "owner": "user2",
+            "creator": "creator3",
+            "done": false,
+            "cleared": false
+        },
+        {
+            "_id": 4,
+            "name": "1 claimed by user1 and finished",
+            "owner": "user1",
+            "creator": "creator4",
+            "done": true,
+            "cleared": false
+        },
+        {
+            "_id": 5,
+            "name": "1 claimed by user2 and finished",
+            "owner": "user2",
+            "creator": "creator5",
+            "done": true,
+            "cleared": false
+        }
+    ]
+}

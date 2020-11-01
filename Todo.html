@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="Todo.js"></script>  
+    </head>
+    <body>
+        <h2>To Do Prototype</h2>
+        <div class="navbar">
+            <div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">Logged in as Bernadette
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+              <a href="#">Logout</a>
+            </div>
+            </div> 
+          </div>
+        <div class="divider">
+            </br>
+        </div>
+        <div class="flex-container center">
+            <div class="done">
+                <input class="checkbox" type="checkbox" checked></input>
+                <span>My finished task</span>
+            </div>
+            <div class="active">
+                <input class="checkbox" type="checkbox"></input>
+                <span>My unfinished task</span>
+                <button class="right">Abandon</button>
+            </div>
+            <div class="done">
+                <span>Someone else's finished</span>
+            </div>  
+            <div class="active">
+                <span>Someone else's unfinished</span>
+            </div>  
+            <div class="active">
+                <span>Unclaimed</span>
+                <button class="right">Claim</button>
+            </div>  
+            <div id="newTask" class="active"> 
+                <input id="taskInput" type="text" placeholder="Enter a new task here">
+                <button id="addButton" class="right">Add</button> 
+            </div>
+            <button id="removeButton" class="removeButton center" type="button">Remove Complete</button>
+        </div>
+        <script type="text/javascript" src="TodoEvents.js"></script>  
+        <script>
+            function myFunction() {
+              document.getElementById("myDropdown").classList.toggle("show");
+            }            
+            window.onclick = function(e) {
+              if (!e.target.matches('.dropbtn')) {
+              var myDropdown = document.getElementById("myDropdown");
+                if (myDropdown.classList.contains('show')) {
+                  myDropdown.classList.remove('show');
+                }
+              }
+            }
+        </script>
+    </body>
+</html>

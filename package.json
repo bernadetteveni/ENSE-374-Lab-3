@@ -1,0 +1,12 @@
+{
+  "name": "ense374lab3",
+  "version": "1.0.0",
+  "description": "lab3",
+  "main": "entryPoint.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test2": "echo hello"
+  },
+  "author": "bernadette",
+  "license": "ISC"
+}
