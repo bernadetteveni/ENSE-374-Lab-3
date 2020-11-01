@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const { static } = require("express");
+const ejs = require("ejs");
 
 const app = express();
 const port = 3000;
@@ -8,11 +9,16 @@ app.listen(port, ()=>{
     console.log("Server is running on port" + port)
 })
 
+app.set('view engine', 'ejs');
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"))
 
 function homepage(req, res){
-    res.sendFile(`${process.cwd()}/public/index.html`);
+    // res.sendFile(`${process.cwd()}/public/login.html`);
+    res.render("index", {
+        myVariable: "myVariable"
+    });
 }
 app.get("/", homepage);
 app.post("/", (req, res)=>{
@@ -22,5 +28,7 @@ app.post("/", (req, res)=>{
 });
 
 app.get("/about", (req, res)=>{
-    res.send("<h1>This is about page</h11>")
+    // res.send("<h1>This is about page</h1>")
+    res.render("about")
+
 });
