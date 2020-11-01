@@ -4,7 +4,8 @@
     </head>
     <body>
         <h2>To Do Prototype</h2>
-        <div class="wrapper">
+        <form method="post", action="/">
+            <div class="wrapper">
             <input class="radio" id="one" name="group" type="radio" checked>
             <input class="radio" id="two" name="group" type="radio">
             <div class="tabs">
@@ -17,16 +18,16 @@
                     <table>
                         <tr>
                             <td>
-                                <input type="text" placeholder="Email address">
+                                <input type="text" name="email" placeholder="Email address">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" placeholder="Password">
+                                <input type="text" name="password" placeholder="Password">
                             </td>
                         </tr>
                     </table>
-                    <button class="buttonRegister" type="button">Log in</button>
+                    <input class="buttonRegister" type="submit" value="Log in">
                 </div>
                 <div class="panel" id="panelTwo">
                     <div class="panelTitle">Sign Up</div>
@@ -47,9 +48,10 @@
                             </td>
                         </tr>
                     </table>
-                    <button class="buttonRegister" type="button">Sign Up</button>
+                    <input class="buttonRegister" type="submit" value="Sign up">
                 </div>
             </div>
-        </div>
+            </div>
+        </form>
     </body>
 </html>
