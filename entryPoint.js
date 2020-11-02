@@ -22,6 +22,7 @@ function homepage(req, res){
         myVariable: "myVariable"
     });
 }
+
 app.get("/", homepage);
 app.post("/", (req, res)=>{
     // res.redirect("/about")
@@ -108,7 +109,21 @@ app.post("/register", (req, res)=>{
 })
 
 app.get("/todo", (req, res)=>{
-    res.render("todo")
+    var username = "user1";
+    readFile("tasks.json", (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        var listOfTasks = JSON.parse(data).tasks;
+        console.log("list: ", listOfTasks);
+        res.render("todo", {
+        title: "To Do",
+        username: username,
+        listOfTasks: listOfTasks
+    });
+    });
+    
 });
 
 app.get("/about", (req, res)=>{

@@ -1,1 +1,88 @@
-<h1>Todo view</h1>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="Todo.js"></script>  
+    </head>
+    <body>
+        <h2><%=title%></h2>
+
+        <div class="navbar">
+            <div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">Logged in as <%=username%>
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+              <a href="#">Logout</a>
+            </div>
+            </div> 
+          </div>
+        <div class="divider">
+            </br>
+        </div>
+        <div class="flex-container center">
+            <p hidden id="username"><%=username%></p>
+            <% for (var item of listOfTasks) {%> 
+
+
+                <% if (item.owner == null && !item.done && !item.cleared){ %>
+                <div class="active">
+                    <p hidden><%=item._id%></p>
+                    <span><%=item.name%></span>
+                    <button class="right">Claim</button>
+                </div>      
+                <% } %>
+
+                <% if (item.owner != username && item.owner != null && !item.done && !item.cleared){ %>
+                    <div class="active">
+                        <p hidden><%=item._id%></p>
+                        <span><%=item.name%></span>
+                    </div>  
+                <% } %>
+
+                <% if (item.owner != username && item.owner != null && item.done && !item.cleared){ %>
+                    <div class="done">
+                        <p hidden><%=item._id%></p>
+                        <span><%=item.name%></span>
+                    </div>          
+                <% } %>
+                <% if (item.owner == username && item.done && !item.cleared){ %>
+                    <div class="done">
+                        <p hidden><%=item._id%></p>
+                        <input class="checkbox" type="checkbox" checked></input>
+                        <span><%=item.name%></span>
+                    </div>
+                <% } %>
+                <% if (item.owner == username && !item.done && !item.cleared){ %>
+                    <div class="active">
+                        <p hidden><%=item._id%></p>
+                        <input class="checkbox" type="checkbox"></input>
+                        <span><%=item.name%></span>
+                        <button class="right">Abandon</button>
+                    </div>
+                <% } %>
+            <% } %>
+
+
+            <div id="newTask" class="active"> 
+                <input id="taskInput" type="text" placeholder="Enter a new task here">
+                <button id="addButton" class="right">Add</button> 
+            </div>
+
+            <button id="removeButton" class="removeButton center" type="button">Remove Complete</button>
+        </div>
+        <script>
+            function myFunction() {
+              document.getElementById("myDropdown").classList.toggle("show");
+            }            
+            window.onclick = function(e) {
+              if (!e.target.matches('.dropbtn')) {
+              var myDropdown = document.getElementById("myDropdown");
+                if (myDropdown.classList.contains('show')) {
+                  myDropdown.classList.remove('show');
+                }
+              }
+            }
+        </script>
+    </body>
+</html>
