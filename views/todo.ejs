@@ -27,7 +27,7 @@
 
         
                 <% if (item.owner == null && !item.done && !item.cleared){ %>
-                <form method = "POST" action = "/claim">
+                <form class="form" method = "POST" action = "/claim">
                     <div class="active">
                         <input hidden name="usernameId" value="<%=username%>"/>
                         <input hidden name="id" value="<%=item._id%>"/>
@@ -38,7 +38,7 @@
                 <% } %>
 
                 <% if (item.owner != username && item.owner != null && !item.done && !item.cleared){ %>
-                    <form>
+                    <form class="form">
                         <div class="active">
                             <input hidden name="id" value="<%=item._id%>"/>
                             <span><%=item.name%></span>
@@ -54,7 +54,7 @@
                 <% } %>
                 
                 <% if (item.owner == username && item.done && !item.cleared){ %>
-                    <form id="unfinishForm" method = "POST" action = "/unfinish">
+                    <form class="form" id="unfinishForm" method = "POST" action = "/unfinish">
                         <div class="done">
                             <input hidden name="id" value="<%=item._id%>"/>
                             <input class="checkbox" onchange="document.getElementById('unfinishForm').submit()" type="checkbox" checked></input>
@@ -64,7 +64,7 @@
                     </form>
                 <% } %>
                 <% if (item.owner == username && !item.done && !item.cleared){ %>
-                    <form id="finishedForm" method = "POST" action = "/abandonorcomplete">
+                    <form class="form" id="finishedForm" method = "POST" action = "/abandonorcomplete">
                         <div class="active">
                             <input hidden name="id" value="<%=item._id%>"/>
                             <input name="checkbox" class="checkbox" type="checkbox" onchange="document.getElementById('finishedForm').submit()"></input>
@@ -84,7 +84,7 @@
                 </div>
             </form>
             <form method = "POST" action = "/purge">
-                <input type="submit" value="Remove Complete" id="removeButton" class="removeButton center"/>
+                <input type="submit" value="Remove Complete" id="removeButton" class="removeButton"/>
             </form>
         </div>
         <script>

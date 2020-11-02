@@ -150,6 +150,7 @@ th {
   }
 
   .flex-container {
+    width: 500px;
     display: flex;
     flex-flow: row nowrap;
     align-content: flex-start;
@@ -160,9 +161,22 @@ th {
 
   .flex-container > div {
     background-color:  #e7edf2;
-    width: 90%;
+    width: 99%;
     margin: auto;
     margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    text-align: start;
+    line-height: 30px;
+    font-size: 30px;
+  }
+
+  .flex-container > .form {
+    background-color:  #e7edf2;
+    width: 99%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding-left: 10px;
     text-align: start;
     line-height: 30px;
@@ -191,7 +205,7 @@ th {
     height: 15px;
   }
 
-  button.right {
+  input.right {
     position: absolute;
     right: 0px;
     height: 100%;
@@ -205,10 +219,11 @@ th {
     background-color: transparent;
     border: 2px solid darkgrey;
     color: darkgrey;
+    margin-left: 35%;
     margin-top: 10px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    /* display: inline-block; */
     padding: 10px 10px;
     width: 150px;
     border-radius: 8px;
