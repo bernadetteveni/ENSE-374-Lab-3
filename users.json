@@ -7,10 +7,6 @@
         {
             "username": "username2",
             "password": "password2"
-        },
-        {
-            "username": "bob",
-            "password": "pass"
         }
     ]
 }

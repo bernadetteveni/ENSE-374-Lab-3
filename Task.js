@@ -7,6 +7,9 @@ export default class Task{
         this.done = done;
         this.cleared = cleared;
     }
+    static setLatestId(id){
+        this.latestId = id;
+    }
     static incrementId(){
         if(!this.latestId){
             this.latestId = 1;

@@ -116,10 +116,17 @@ app.get("/todo", (req, res)=>{
             return;
         }
         var listOfTasks = JSON.parse(data).tasks;
-        console.log("list: ", listOfTasks);
+        var largestTaskId = null;
+        for(var i = 0; i < listOfTasks.length; i++){
+            if(listOfTasks[i]._id>largestTaskId){
+                largestTaskId = listOfTasks[i]._id;
+            }
+        }
+
         res.render("todo", {
         title: "To Do",
         username: username,
+        largestTaskId: largestTaskId,
         listOfTasks: listOfTasks
     });
     });
@@ -127,6 +134,131 @@ app.get("/todo", (req, res)=>{
 });
 
 app.get("/about", (req, res)=>{
-    // res.send("<h1>This is about page</h1>")
     res.render("about")
+});
+
+app.get("/logout", (req, res)=>{
+    res.redirect("/")
+});
+
+app.post("/addtask", (req, res)=>{
+    readFile("tasks.json", (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        let tasks = JSON.parse(data);
+        console.log(req.body.usernameId);
+       Task.setLatestId(req.body.largestTaskId);
+        tasks.tasks.push(new Task(req.body.taskInput, 
+        null, 
+        req.body.usernameId, 
+        false, 
+        false));
+        fs.writeFile("./tasks.json", JSON.stringify(tasks, null, 4), (err)=>{
+            if(err){
+                console.error(err);
+                return;
+            }
+            });
+            res.redirect("/todo");
+    });
+});
+
+app.post("/claim", (req, res)=>{
+    readFile("tasks.json", (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        let tasks = JSON.parse(data);
+        var idToClaim = req.body.id;
+        for(var i=0; i<tasks.tasks.length; i++){
+            if(tasks.tasks[i]._id == idToClaim){
+                tasks.tasks[i].owner = req.body.usernameId;
+            }
+        }
+        fs.writeFile("./tasks.json", JSON.stringify(tasks, null, 4), (err)=>{
+            if(err){
+                console.error(err);
+                return;
+            }
+            });
+            res.redirect("/todo");
+    });
+});
+
+app.post("/unfinish", (req, res)=>{
+    readFile("tasks.json", (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        let tasks = JSON.parse(data);
+        var idToUnfinish = req.body.id;
+        for(var i=0; i<tasks.tasks.length; i++){
+            if(tasks.tasks[i]._id == idToUnfinish){
+                tasks.tasks[i].done = false;
+            }
+        }
+        fs.writeFile("./tasks.json", JSON.stringify(tasks, null, 4), (err)=>{
+            if(err){
+                console.error(err);
+                return;
+            }
+            });
+            res.redirect("/todo");
+    });
+});
+
+app.post("/abandonorcomplete", (req, res)=>{
+    readFile("tasks.json", (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        let tasks = JSON.parse(data);
+        var idToUnfinish = req.body.id;
+        for(var i=0; i<tasks.tasks.length; i++){
+            if(tasks.tasks[i]._id == idToUnfinish){
+                if(req.body.checkbox){
+                    //complete
+                    tasks.tasks[i].done = true;
+                }
+                else{
+                    //abandon
+                    tasks.tasks[i].owner = null;
+                }
+            }
+        }
+        fs.writeFile("./tasks.json", JSON.stringify(tasks, null, 4), (err)=>{
+            if(err){
+                console.error(err);
+                return;
+            }
+            });
+            res.redirect("/todo");
+    });
+});
+
+app.post("/purge", (req, res)=>{
+    readFile("tasks.json", (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        let tasks = JSON.parse(data);
+        for(var i=0; i<tasks.tasks.length; i++){
+            if(tasks.tasks[i].done){
+                tasks.tasks[i].cleared = true;
+            }
+        }
+        fs.writeFile("./tasks.json", JSON.stringify(tasks, null, 4), (err)=>{
+            if(err){
+                console.error(err);
+                return;
+            }
+            });
+            res.redirect("/todo");
+    });
 });

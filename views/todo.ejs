@@ -21,55 +21,71 @@
             </br>
         </div>
         <div class="flex-container center">
-            <p hidden id="username"><%=username%></p>
+            <input hidden name="largestTaskId" value="<%=largestTaskId%>"/>
+            <input hidden name="usernameId" value="<%=username%>"/>
             <% for (var item of listOfTasks) {%> 
 
-
+        
                 <% if (item.owner == null && !item.done && !item.cleared){ %>
-                <div class="active">
-                    <p hidden><%=item._id%></p>
-                    <span><%=item.name%></span>
-                    <button class="right">Claim</button>
-                </div>      
+                <form method = "POST" action = "/claim">
+                    <div class="active">
+                        <input hidden name="usernameId" value="<%=username%>"/>
+                        <input hidden name="id" value="<%=item._id%>"/>
+                        <span><%=item.name%></span>
+                        <input type="submit" value="Claim" class="right"/>
+                    </div>  
+                </form>    
                 <% } %>
 
                 <% if (item.owner != username && item.owner != null && !item.done && !item.cleared){ %>
-                    <div class="active">
-                        <p hidden><%=item._id%></p>
-                        <span><%=item.name%></span>
-                    </div>  
+                    <form>
+                        <div class="active">
+                            <input hidden name="id" value="<%=item._id%>"/>
+                            <span><%=item.name%></span>
+                        </div> 
+                    </form>
                 <% } %>
 
                 <% if (item.owner != username && item.owner != null && item.done && !item.cleared){ %>
                     <div class="done">
-                        <p hidden><%=item._id%></p>
+                        <input hidden name="id" value="<%=item._id%>"/>
                         <span><%=item.name%></span>
                     </div>          
                 <% } %>
+                
                 <% if (item.owner == username && item.done && !item.cleared){ %>
-                    <div class="done">
-                        <p hidden><%=item._id%></p>
-                        <input class="checkbox" type="checkbox" checked></input>
-                        <span><%=item.name%></span>
-                    </div>
+                    <form id="unfinishForm" method = "POST" action = "/unfinish">
+                        <div class="done">
+                            <input hidden name="id" value="<%=item._id%>"/>
+                            <input class="checkbox" onchange="document.getElementById('unfinishForm').submit()" type="checkbox" checked></input>
+                            <span><%=item.name%></span>
+                            <input hidden type="submit"/>
+                        </div>
+                    </form>
                 <% } %>
                 <% if (item.owner == username && !item.done && !item.cleared){ %>
-                    <div class="active">
-                        <p hidden><%=item._id%></p>
-                        <input class="checkbox" type="checkbox"></input>
-                        <span><%=item.name%></span>
-                        <button class="right">Abandon</button>
-                    </div>
+                    <form id="finishedForm" method = "POST" action = "/abandonorcomplete">
+                        <div class="active">
+                            <input hidden name="id" value="<%=item._id%>"/>
+                            <input name="checkbox" class="checkbox" type="checkbox" onchange="document.getElementById('finishedForm').submit()"></input>
+                            <span><%=item.name%></span>
+                            <input type="submit" value="Abandon" class="right"/>
+                        </div>
+                    </form>
                 <% } %>
             <% } %>
 
-
-            <div id="newTask" class="active"> 
-                <input id="taskInput" type="text" placeholder="Enter a new task here">
-                <button id="addButton" class="right">Add</button> 
-            </div>
-
-            <button id="removeButton" class="removeButton center" type="button">Remove Complete</button>
+            <form method = "POST" action = "/addTask">
+                <input hidden name="largestTaskId" value="<%=largestTaskId%>"/>
+                <input hidden name="usernameId" value="<%=username%>"/>
+                <div id="newTask" class="active"> 
+                    <input id="taskInput" name="taskInput" type="text" placeholder="Enter a new task here">
+                    <input type="submit" value="Add" id="addButton" class="right"/>
+                </div>
+            </form>
+            <form method = "POST" action = "/purge">
+                <input type="submit" value="Remove Complete" id="removeButton" class="removeButton center"/>
+            </form>
         </div>
         <script>
             function myFunction() {
