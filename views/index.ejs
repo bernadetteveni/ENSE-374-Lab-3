@@ -1,3 +1,59 @@
-<h1>Hello</h1>
-<%=myVariable%>
-<h1>World</h1>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <h2>To Do Prototype</h2>  
+            <div class="wrapper">
+            <input class="radio" id="one" name="group" type="radio" checked>
+            <input class="radio" id="two" name="group" type="radio">
+            <div class="tabs">
+                <label class="tab" id="tabOne" for="one">Log In</label>
+                <label class="tab" id="tabTwo" for="two">Sign Up</label>
+            </div>
+            <div class="panels">
+                <form method="post", action="/login">
+                    <div class="panel" id="panelOne">
+                    <div class="panelTitle">Log In</div>
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="text" name="username" placeholder="Username">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="password" placeholder="Password">
+                            </td>
+                        </tr>
+                    </table>
+                    <input class="buttonRegister" type="submit" value="Log in">
+                    </div>
+                </form>
+                <form method="post", action="/register">
+                    <div class="panel" id="panelTwo">
+                    <div class="panelTitle">Sign Up</div>
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="text" name="regUsername" placeholder="username">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="regPassword" placeholder="Password">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Authentication">
+                            </td>
+                        </tr>
+                    </table>
+                    <input class="buttonRegister" type="submit" value="Sign up">
+                    </div>
+                </form>
+            </div>
+            </div>
+    </body>
+</html>

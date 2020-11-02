@@ -1,38 +1,29 @@
-class User{
-    constructor (username, password){
-        this.username = username;
-        this.password = password;
-    }
-}
+// const User = require('./User.js').default;
+// const Task = require('./Task.js').default;
 
-class Task{
-    constructor(name, owner, creator, done, cleared){
-        this._id = Task.incrementId();
-        this.name = name;
-        this.owner = owner;
-        this.creator = creator;
-        this.done = done;
-        this.cleared = cleared;
-    }
-    static incrementId(){
-        if(!this.latestId){
-            this.latestId = 1;
-        }
-        else{
-            this.latestId++;
-        }
-        return this.latestId;
-    }
-}
-
-const fs = require("fs");
+import User from './User.js'
+import Task from './Task.js'
+import fs from "fs"; 
 
 function main(){
     var user1 = new User("username1", "password1");
-    var user2 = new User("username2", "password2")
+    var user2 = new User("username2", "password2");
     var users = [user1, user2];
     console.log(users[0].username); 
     console.log(users.length);
+
+    var usersObj = {
+        users: []
+    }
+    usersObj.users = users;
+
+
+    fs.writeFile("./users.json", JSON.stringify(usersObj, null, 4), (err)=>{
+        if(err){
+            console.error(err);
+            return;
+        }
+    });
 
     var task1 = new Task(
         "1 unclaimed task", 
@@ -90,6 +81,15 @@ function main(){
     tasks = null;
     users = null;
 
+    fs.readFile("users.json", (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        let info = JSON.parse(data);
+        console.log(info);
+        tasks = info;
+    });
 
     fs.readFile("tasks.json", (err, data) => {
         if (err) {
@@ -100,7 +100,6 @@ function main(){
         console.log(info);
         tasks = info;
     });
-    
 
 }
 
