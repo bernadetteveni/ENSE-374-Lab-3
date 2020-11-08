@@ -26,7 +26,7 @@ function homepage(req, res){
 app.get("/", homepage);
 app.post("/", (req, res)=>{
     // res.redirect("/about")
-    console.log(req.body.email)
+    console.log(req.body.username)
     res.send("<h1>Message Received</h1>")
 });
 
