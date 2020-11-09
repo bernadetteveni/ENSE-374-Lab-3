@@ -1,4 +1,5 @@
 # ENSE 374 Lab 3
+### Ignore commits made on Nov. 8, 2020. Those were supposed to be committed to my Lab 4 repository.
 
 ## Objective 
 The purpose of this lab is to introduce you to Controller component of our Node stack Model-View-Controller implementation. In particular in this lab you will focus on using the Node.js and Express.js packages to implement the server side of the to-do list application. Additionally, content on the front end will be modified by using EJS templates.
